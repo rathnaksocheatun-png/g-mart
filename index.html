@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G Mart - Game Account Marketplace</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Khmer & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="glass-nav sticky top-0 z-40 px-4 lg:px-8 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" onclick="showSection('home')" class="flex items-center space-x-3 group">
+                <div id="site-logo-container" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center font-bold text-xl text-white shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                    <span id="site-logo-text">G</span>
+                </div>
+                <div>
+                    <span id="site-name-text" class="font-gaming text-2xl font-bold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">G MART</span>
+                    <span class="text-[10px] block text-gray-400 -mt-1 font-mono tracking-widest uppercase">Gaming Store</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <button onclick="showSection('home')" class="hover:text-indigo-400 transition flex items-center gap-2">🏠 Home</button>
+                <button onclick="showSection('games')" class="hover:text-indigo-400 transition flex items-center gap-2">🎮 Games</button>
+                <button onclick="showSection('accounts')" class="hover:text-indigo-400 transition flex items-center gap-2">🛒 Account Listings</button>
+                <button onclick="showSection('my-orders')" class="hover:text-indigo-400 transition flex items-center gap-2 relative">
+                    📦 My Orders
+                    <span id="order-badge" class="hidden absolute -top-2 -right-3 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="openAdminLoginModal()" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-shield-halved text-indigo-400"></i>
+                    <span>🔑 Admin Panel</span>
+                </button>
+                <div id="user-auth-btn">
+                    <button onclick="openAuthModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span>ចូលប្រើ (Login)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-8">
+        <!-- HOME SECTION -->
+        <section id="section-home" class="space-y-12">
+            <div class="relative rounded-3xl overflow-hidden glass-card p-8 md:p-12 flex flex-col md:flex-row items-center justify-between border border-indigo-500/20 glow-effect">
+                <div class="md:w-1/2 space-y-6 z-10">
+                    <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 text-xs font-semibold uppercase tracking-widest">🔥 ទីផ្សារលក់ Game Account ធំជាងគេ</span>
+                    <h1 class="text-3xl md:text-5xl font-bold font-gaming leading-tight text-white">
+                        ទិញ លក់ គណនីហ្គេម<br><span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">សុវត្ថិភាព & លឿនរហ័ស</span>
+                    </h1>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">G Mart ផ្តល់ជូននូវ account ហ្គេម Free Fire, Mobile Legends, PUBG Mobile ជាមួយតម្លៃសមរម្យ និងទូទាត់តាម KHQR ងាយស្រួល។</p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="showSection('accounts')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-xl transition">មើល Account ទាំងអស់</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center relative">
+                    <img id="home-hero-banner" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Gaming Banner" class="rounded-2xl shadow-2xl border border-gray-700/50 object-cover max-h-80 w-full md:w-auto">
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-white font-gaming mb-6">🎮 ប្រភេទ ហ្គេម (Game Categories)</h2>
+                <div id="home-categories-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-white font-gaming mb-6">🔥 Account មកថ្មី & Hot Items</h2>
+                <div id="home-featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- GAMES CATEGORIES SECTION -->
+        <section id="section-games" class="hidden space-y-8">
+            <h2 class="text-3xl font-bold text-white font-gaming">🎮 ប្រភេទ Game ទាំងអស់</h2>
+            <div id="full-games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- ACCOUNTS LISTINGS SECTION -->
+        <section id="section-accounts" class="hidden space-y-8">
+            <h2 class="text-3xl font-bold text-white font-gaming">🛒 គណនីហ្គេមទាំងអស់</h2>
+            <div class="glass-card p-4 rounded-2xl flex flex-col md:flex-row gap-4">
+                <input type="text" id="filter-search" oninput="applyAccountFilters()" placeholder="ស្វែងរកតាម ID, ឈ្មោះ..." class="w-full bg-gray-900 text-white px-4 py-2.5 rounded-xl border border-gray-700 text-sm">
+                <select id="filter-game" onchange="applyAccountFilters()" class="w-full md:w-56 bg-gray-900 text-white px-4 py-2.5 rounded-xl border border-gray-700 text-sm">
+                    <option value="ALL">All Games</option>
+                </select>
+                <select id="filter-sort" onchange="applyAccountFilters()" class="w-full md:w-56 bg-gray-900 text-white px-4 py-2.5 rounded-xl border border-gray-700 text-sm">
+                    <option value="newest">🆕 ចុងក្រោយបង្អស់</option>
+                    <option value="price-low">💰 តម្លៃ: ទាប ទៅ ខ្ពស់</option>
+                    <option value="price-high">💰 តម្លៃ: ខ្ពស់ ទៅ ទាប</option>
+                </select>
+            </div>
+            <div id="accounts-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- ACCOUNT DETAIL SECTION -->
+        <section id="section-account-detail" class="hidden space-y-8">
+            <button onclick="showSection('accounts')" class="px-4 py-2 rounded-xl bg-gray-800 text-gray-300 text-sm font-semibold hover:bg-gray-700 transition">⬅️ ត្រឡប់ក្រោយ</button>
+            <div id="account-detail-content" class="grid grid-cols-1 lg:grid-cols-12 gap-8"></div>
+        </section>
+
+        <!-- MY ORDERS SECTION -->
+        <section id="section-my-orders" class="hidden space-y-8">
+            <h2 class="text-3xl font-bold text-white font-gaming">📦 ការទិញរបស់ខ្ញុំ</h2>
+            <div id="my-orders-list" class="space-y-4"></div>
+        </section>
+
+        <!-- ADMIN DASHBOARD SECTION -->
+        <section id="section-admin" class="hidden space-y-8">
+            <div class="flex flex-wrap justify-between items-center border-b border-gray-800 pb-4 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-white font-gaming">🔑 Admin Dashboard</h2>
+                    <p class="text-xs text-gray-400 mt-1">គ្រប់គ្រងទិន្នន័យគេហទំព័រទាំងមូល</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="openAddAccountModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition">➕ បន្ថែម Account ថ្មី</button>
+                    <button onclick="adminLogout()" class="px-4 py-2 rounded-xl bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white text-sm font-semibold transition">ចាកចេញ (Logout)</button>
+                </div>
+            </div>
+
+            <!-- ADMIN TABS MENU -->
+            <div class="flex border-b border-gray-800 overflow-x-auto text-sm font-medium">
+                <button onclick="switchAdminTab('accounts')" id="tab-btn-accounts" class="admin-tab-btn active px-5 py-3 border-b-2 border-indigo-500 text-indigo-400">🛒 Account ទាំងអស់</button>
+                <button onclick="switchAdminTab('orders')" id="tab-btn-orders" class="admin-tab-btn px-5 py-3 text-gray-400 hover:text-white">📦 Orders & Payment</button>
+                <button onclick="switchAdminTab('categories')" id="tab-btn-categories" class="admin-tab-btn px-5 py-3 text-gray-400 hover:text-white">🎮 Category ហ្គេម</button>
+                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="admin-tab-btn px-5 py-3 text-gray-400 hover:text-white">⚙️ ការកំណត់ Website & Contacts</button>
+            </div>
+
+            <!-- STATS OVERVIEW -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-card p-5 rounded-2xl border border-indigo-500/20">
+                    <span class="text-xs text-gray-400">ចំណូលសរុប</span>
+                    <div id="admin-stat-sales" class="text-2xl font-bold text-emerald-400">$0.00</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-purple-500/20">
+                    <span class="text-xs text-gray-400">Account សរុប</span>
+                    <div id="admin-stat-accounts" class="text-2xl font-bold text-white">0</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-amber-500/20">
+                    <span class="text-xs text-gray-400">Orders កំពុងរងចាំ</span>
+                    <div id="admin-stat-pending" class="text-2xl font-bold text-amber-400">0</div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border border-blue-500/20">
+                    <span class="text-xs text-gray-400">ចំនួន Orders សរុប</span>
+                    <div id="admin-stat-users" class="text-2xl font-bold text-white">0</div>
+                </div>
+            </div>
+
+            <!-- TAB 1: ACCOUNTS MANAGEMENT -->
+            <div id="admin-panel-accounts" class="admin-panel-content space-y-4">
+                <div class="overflow-x-auto glass-card rounded-2xl border border-gray-800">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900/90 uppercase text-xs text-gray-400">
+                            <tr>
+                                <th class="p-4">រូបភាព</th>
+                                <th class="p-4">Title</th>
+                                <th class="p-4">Game ID</th>
+                                <th class="p-4">តម្លៃ</th>
+                                <th class="p-4">ស្ថានភាព</th>
+                                <th class="p-4 text-right">សកម្មភាព</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-accounts-table" class="divide-y divide-gray-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: ORDERS MANAGEMENT -->
+            <div id="admin-panel-orders" class="admin-panel-content hidden space-y-4">
+                <div class="overflow-x-auto glass-card rounded-2xl border border-gray-800">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900/90 uppercase text-xs text-gray-400">
+                            <tr>
+                                <th class="p-4">Order ID</th>
+                                <th class="p-4">Account</th>
+                                <th class="p-4">អ្នកទិញ</th>
+                                <th class="p-4">តម្លៃ</th>
+                                <th class="p-4">ស្ថានភាព Payment</th>
+                                <th class="p-4 text-right">សកម្មភាព</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-table" class="divide-y divide-gray-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: CATEGORIES MANAGEMENT -->
+            <div id="admin-panel-categories" class="admin-panel-content hidden space-y-6">
+                <div class="glass-card p-6 rounded-2xl border border-gray-800 max-w-xl">
+                    <h3 class="text-lg font-bold text-white mb-4">➕ បន្ថែម Category ថ្មី</h3>
+                    <form onsubmit="handleSaveCategory(event)" class="space-y-4">
+                        <input type="hidden" id="cat-edit-index" value="-1">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">ឈ្មោះ Category (ឧទាហរណ៍: Free Fire)</label>
+                            <input type="text" id="cat-name" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">Icon Emoji (ឧទាហរណ៍: 🔥)</label>
+                            <input type="text" id="cat-icon" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">Link រូបភាព Category (URL)</label>
+                            <input type="url" id="cat-image" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm" placeholder="https://...">
+                        </div>
+                        <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition">រក្សាទុក Category</button>
+                    </form>
+                </div>
+                <div class="overflow-x-auto glass-card rounded-2xl border border-gray-800">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900/90 uppercase text-xs text-gray-400">
+                            <tr>
+                                <th class="p-4">Icon</th>
+                                <th class="p-4">ឈ្មោះ</th>
+                                <th class="p-4">រូបភាព</th>
+                                <th class="p-4 text-right">សកម្មភាព</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-categories-table" class="divide-y divide-gray-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: WEBSITE SETTINGS & CONTACTS -->
+            <div id="admin-panel-settings" class="admin-panel-content hidden space-y-6">
+                <form onsubmit="handleSaveSettings(event)" class="glass-card p-6 rounded-2xl border border-gray-800 max-w-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-2">⚙️ ការកំណត់ទូទៅ (Site Settings)</h3>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">ឈ្មោះ Website</label>
+                        <input type="text" id="setting-site-name" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Link រូប Logo Website (URL)</label>
+                        <input type="url" id="setting-site-logo" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm" placeholder="ទុកទំនេរប្រសិនបើចង់ប្រើ Logo អក្សរ G ដើម">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Link រូបភាព Banner (Home Hero Image)</label>
+                        <input type="url" id="setting-hero-banner" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Link ទំនាក់ទំនង Telegram</label>
+                        <input type="url" id="setting-telegram" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm" placeholder="https://t.me/yourusername">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Link ទំនាក់ទំនង Messenger</label>
+                        <input type="url" id="setting-messenger" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm" placeholder="https://m.me/yourpage">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Link រូបភាព KHQR Code សម្រាប់បង់ប្រាក់</label>
+                        <input type="url" id="setting-khqr" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition">💾 រក្សាទុកការផ្លាស់ប្តូរទាំងអស់ (Update Now)</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 bg-gray-950/80 py-8 px-4 text-center text-gray-500 text-sm space-y-4">
+        <div class="flex justify-center gap-6 text-lg">
+            <a id="footer-telegram" href="https://t.me/" target="_blank" class="text-gray-400 hover:text-indigo-400 transition"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a id="footer-messenger" href="https://m.me/" target="_blank" class="text-gray-400 hover:text-indigo-400 transition"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a>
+        </div>
+        <p>© 2026 G MART. All rights reserved.</p>
+    </footer>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="modal-admin-login" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full p-6 rounded-2xl border border-indigo-500/30 space-y-6">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h3 class="text-xl font-bold text-white font-gaming">🔐 ចូលប្រើប្រាស់ជា Admin</h3>
+                <button onclick="closeAdminLoginModal()" class="text-gray-400 hover:text-white">✕</button>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">បញ្ចូលលេខសម្ងាត់ Admin</label>
+                    <input type="password" id="admin-pass-input" required class="w-full bg-gray-900 text-white px-4 py-3 rounded-xl border border-gray-700 focus:border-indigo-500 outline-none text-sm" placeholder="Password...">
+                </div>
+                <p id="admin-error-msg" class="text-red-400 text-xs hidden">❌ លេខសម្ងាត់មិនត្រឹមត្រូវទេ!</p>
+                <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition">ផ្ទៀងផ្ទាត់លេខសម្ងាត់ (Login)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ADD/EDIT ACCOUNT -->
+    <div id="modal-account" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card max-w-2xl w-full p-6 rounded-2xl border border-indigo-500/30 space-y-6 my-8">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h3 id="modal-account-title" class="text-xl font-bold text-white font-gaming">➕ បន្ថែម Account ថ្មី</h3>
+                <button onclick="closeAccountModal()" class="text-gray-400 hover:text-white">✕</button>
+            </div>
+            <form onsubmit="handleSaveAccount(event)" class="space-y-4">
+                <input type="hidden" id="acc-edit-id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">ចំណងជើង (Title)</label>
+                        <input type="text" id="acc-title" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">ប្រភេទហ្គេម (Game)</label>
+                        <select id="acc-game" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm"></select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Game ID</label>
+                        <input type="text" id="acc-game-id" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">តម្លៃ ($ USD)</label>
+                        <input type="number" step="0.01" id="acc-price" required class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Level</label>
+                        <input type="text" id="acc-level" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">Rank</label>
+                        <input type="text" id="acc-rank" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">រូបភាពទំនិញ (បញ្ចូល Link រូបភាព បំបែកដោយសញ្ញា ក្បៀស , សម្រាប់រូបច្រើនសន្លឹក)</label>
+                    <textarea id="acc-images" rows="2" required placeholder="https://image1.jpg, https://image2.jpg" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">ព័ត៌មានលម្អិត (Description)</label>
+                    <textarea id="acc-desc" rows="3" class="w-full bg-gray-900 text-white px-4 py-2 rounded-xl border border-gray-700 text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition">រក្សាទុក (Save Account)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL BUY NOW / PAYMENT -->
+    <div id="modal-buy" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full p-6 rounded-2xl border border-indigo-500/30 space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h3 class="text-xl font-bold text-white font-gaming">💳 ទូទាត់ប្រាក់តាម KHQR</h3>
+                <button onclick="closeBuyModal()" class="text-gray-400 hover:text-white">✕</button>
+            </div>
+            <div class="text-center space-y-3">
+                <p id="buy-account-title" class="font-bold text-indigo-400 text-sm"></p>
+                <div class="text-2xl font-bold text-emerald-400" id="buy-account-price"></div>
+                <div class="flex justify-center py-2">
+                    <img id="buy-khqr-img" src="https://via.placeholder.com/250x300?text=KHQR+Payment" class="w-56 h-auto rounded-xl border border-gray-700 shadow-lg">
+                </div>
+                <p class="text-xs text-gray-400">សូមស្កែនទូទាត់ រួចចុច "ខ្ញុំបានទូទាត់រួចរាល់"</p>
+            </div>
+            <button onclick="confirmPurchase()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition">✅ ខ្ញុំបានទូទាត់រួចរាល់ (Confirm Order)</button>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
